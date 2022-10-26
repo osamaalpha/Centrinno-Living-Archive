@@ -1,7 +1,7 @@
 const sainty = require("@sanity/client");
 
 const client = sainty({
-  projectId: "ya0dfnrx",
+  projectId: process.env.REACT_APP_SANITY_ID,
   dataset: "production",
   apiVersion: "2022-10-19",
   useCdn: true,
