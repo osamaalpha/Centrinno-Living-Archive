@@ -1,7 +1,7 @@
 import { gql } from "graphql-request";
 import graphApi from "../graphqlApi";
 
-const fetchData = async () => {
+export const fetchData = async () => {
   const query = gql`
     {
       allStory {
@@ -38,4 +38,19 @@ const fetchData = async () => {
   return data;
 };
 
-export default fetchData
+export const fetchStories = async () => {
+  const query = gql`
+    {
+      allStory {
+        title
+      }
+    }
+  `;
+
+  const data = await graphApi(query);
+
+  return data;
+};
+
+// export default fetchData
+// export default fetchStories

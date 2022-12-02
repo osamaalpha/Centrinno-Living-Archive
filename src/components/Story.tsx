@@ -1,33 +1,21 @@
 import { useEffect, useState } from "react";
-import fetchData from "../helpers/fetchData";
+import { useParams } from "react-router-dom";
 
-
-export const Story = () => {
+export const Story = ({ stories }: any) => {
   const [data, setData] = useState([] as any);
 
-  useEffect(() => {
-    fetchData().then((res) => {
-        setData(res)
-        console.log(data)
-    })
-  }, []);
+  const { slug } = useParams();
+
+  const story = stories.allStory.find(
+    (story: any) => story.title.replaceAll(" ", "-")?.toLowerCase() === slug
+  );
 
   return (
-    <>
-      {data?.allStory?.length > 0 &&
-        data?.allStory?.map((item: any, index: number) => {
-          return (
-            <div key={index}>
-              <h1>{item.title}</h1>
-              {item && item.heroImage && (
-                <img
-                  src={item.heroImage.asset.url}
-                  alt={item.heroImage.title}
-                />
-              )}
-            </div>
-          );
-        })}
-    </>
+    <div key={story.id}>
+      <h1>{story.title}</h1>
+      {story && story.heroImage && (
+        <img src={story.heroImage.asset.url} alt={story.heroImage.title} />
+      )}
+    </div>
   );
 };
