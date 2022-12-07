@@ -1,4 +1,3 @@
-import "./App.css";
 import { Story } from "./components/Story";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { StoriesProvider } from "./context/storyContext";
