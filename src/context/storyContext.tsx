@@ -1,11 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, ReactNode } from "react";
 import ReactDOM from "react-dom/client";
 import client from "../sanityService";
+import { IStory } from "../types/types";
 
-const StoryContext = React.createContext<any>(null);
+const StoryContext = React.createContext<IStory[] | null>(null);
 export const useStoryContext = () => useContext(StoryContext);
 
-export function StoriesProvider({ children }: any) {
+interface IStoryProvider {
+  children: ReactNode;
+}
+
+export function StoriesProvider({ children }: IStoryProvider) {
   const [stories, setStories] = useState([]);
   useEffect(() => {
     async function fetchData() {

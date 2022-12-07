@@ -1,14 +1,15 @@
 import client from "../sanityService";
 import imageUrlBuilder from "@sanity/image-url";
+import { IImage } from "../types/types";
 
 interface ImgHandlerProps {
-  imgSrc: any;
+  imgSrc: IImage;
   title: string;
 }
 const ImgHandler = ({ imgSrc, title }: ImgHandlerProps) => {
   const builder = imageUrlBuilder(client);
 
-  function urlFor(source: any) {
+  function urlFor(source: IImage) {
     return builder.image(source);
   }
   return (
