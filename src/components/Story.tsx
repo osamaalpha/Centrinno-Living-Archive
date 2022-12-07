@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useStoryContext } from "../context/storyContext";
+import ImgHandler from "./ImgHandler";
 
 export const Story = () => {
   const stories = useStoryContext();
@@ -14,7 +15,10 @@ export const Story = () => {
     <div key={story.id}>
       <h1>{story.title}</h1>
       {story && story.heroImage && (
-        <img src={story.heroImage.asset.url} alt={story.heroImage.title} />
+        <ImgHandler
+          imgSrc={story.heroImage as string}
+          title={story.heroImage.title as string}
+        />
       )}
     </div>
   );

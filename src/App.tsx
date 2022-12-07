@@ -8,9 +8,9 @@ function App() {
   return (
     <StoriesProvider>
       <Router>
+        <Grid />
         <Routes>
-          <Route path="/" element={<Grid />}></Route>
-          <Route path="stories/:slug" element={<Story />}></Route>
+          <Route path="/:slug" element={<Story />}></Route>
         </Routes>
       </Router>
     </StoriesProvider>
