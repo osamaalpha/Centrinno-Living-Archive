@@ -3,9 +3,9 @@ import imageUrlBuilder from "@sanity/image-url";
 
 interface ImgHandlerProps {
   imgSrc: any;
-  title: string;
+  altText: string;
 }
-const ImgHandler = ({ imgSrc, title }: ImgHandlerProps) => {
+const ImgHandler = ({ imgSrc, altText }: ImgHandlerProps) => {
   const builder = imageUrlBuilder(client);
 
   function urlFor(source: any) {
@@ -13,7 +13,7 @@ const ImgHandler = ({ imgSrc, title }: ImgHandlerProps) => {
   }
   return (
     <>
-      <img src={urlFor(imgSrc).url()} alt={title} />
+      <img src={urlFor(imgSrc).url()} alt={altText} />
     </>
   );
 };
