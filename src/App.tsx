@@ -1,27 +1,16 @@
 import "./App.css";
 import { Story } from "./components/Story";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import { fetchData } from "./helpers/fetchData";
-import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { StoriesProvider } from "./context/storyContext";
 import Grid from "./components/Grid";
 
 function App() {
-  // const [stories, setStories] = useState([] as any);
-
-  // useEffect(() => {
-  //   fetchData().then((res) => {
-  //     setStories(res);
-  //   });
-  // }, []);
-
   return (
     <StoriesProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<Grid />}>
-            {/* <Story stories={stories} /> */}
-          </Route>
+          <Route path="/" element={<Grid />}></Route>
+          <Route path="stories/:slug" element={<Story />}></Route>
         </Routes>
       </Router>
     </StoriesProvider>

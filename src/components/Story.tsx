@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useStoryContext } from "../context/storyContext";
 
-export const Story = ({ stories }: any) => {
-  const [data, setData] = useState([] as any);
+export const Story = () => {
+  const stories = useStoryContext();
 
   const { slug } = useParams();
 
-  const story = stories.allStory.find(
+  const story = stories.find(
     (story: any) => story.title.replaceAll(" ", "-")?.toLowerCase() === slug
   );
 
