@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useStoryContext } from "../context/storyContext";
+import ImgHandler from "./ImgHandler";
 
-export const Story = ({ stories }: any) => {
-  const [data, setData] = useState([] as any);
+export const Story = () => {
+  const stories = useStoryContext();
 
   const { slug } = useParams();
 
-  const story = stories.allStory.find(
+  const story = stories.find(
     (story: any) => story.title.replaceAll(" ", "-")?.toLowerCase() === slug
   );
 
@@ -14,7 +15,10 @@ export const Story = ({ stories }: any) => {
     <div key={story.id}>
       <h1>{story.title}</h1>
       {story && story.heroImage && (
-        <img src={story.heroImage.asset.url} alt={story.heroImage.title} />
+        <ImgHandler
+          imgSrc={story.heroImage as string}
+          title={story.heroImage.title as string}
+        />
       )}
     </div>
   );
