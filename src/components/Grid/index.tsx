@@ -4,6 +4,7 @@ import { useStoryContext } from "../../context/storyContext";
 import { GridSection } from "./styles";
 import StoryCard from "../StoryCard";
 
+
 const Grid = () => {
   const stories = useStoryContext();
   console.log(stories);
@@ -11,17 +12,16 @@ const Grid = () => {
     <GridSection className="">
       {stories?.length > 0 &&
         stories?.map((story: any) => (
-          <Link
-            to={`/${story.title.replaceAll(" ", "-")?.toLowerCase()}`}
-            key={story.title.toLowerCase()}
-          >
-            {/* {story.title} */}
+          // <Link
+          //   to={`/${story.title.replaceAll(" ", "-")?.toLowerCase()}`}
+          //   key={story.title.toLowerCase()}
+          // >
             <StoryCard
               image={story.heroImage}
               title={story.title}
               summary={story.summaryText}
             />
-          </Link>
+          // </Link>
         ))}
     </GridSection>
   );

@@ -20,11 +20,17 @@ export const Story = () => {
         <Link to={"/"}> BACK </Link>
       </div>
       {story && story.heroImage && (
-        <ImgHandler
-          imgSrc={story.heroImage as string}
-          altText={story.heroImage.title as string}
-        />
+        <div className="hero-component">
+          
+          <ImgHandler
+            imgSrc={story.heroImage as string}
+            altText={story.heroImage.title as string}
+          />
+        </div>
       )}
+      {story && story.summaryText}
+      <br/>
+      {story && story.mainText}
     </StoryPage>
   );
 };
