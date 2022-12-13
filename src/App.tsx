@@ -11,6 +11,7 @@ import Home from "./components/Home/Home";
 import Navigation from "./components/Navigation";
 import About from "./components/About";
 import Taxonomy from "./components/Taxonomy";
+import Filter from "./components/Filter";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               <Route path="/*" element={<NoMatch />}></Route>
               <Route path="/about" element={<About/>}></Route>
               <Route path="/taxonomy" element={<Taxonomy />}></Route>
+              <Route path="/taxonomy/:slug" element={<Filter />}></Route>
             </Route>
           </Routes>
         </CentrinnoProvider>

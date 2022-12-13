@@ -1,10 +1,17 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, ReactNode } from "react";
+import ReactDOM from "react-dom/client";
 import client from "../sanityService";
+import { IContext, IStory } from "../types/types";
 
-const CentrinnoContext = React.createContext<any>(null);
+const CentrinnoContext = React.createContext<IContext | null>(null);
 export const useCentrinnoContext = () => useContext(CentrinnoContext);
 
-export function CentrinnoProvider({ children }: any) {
+interface IStoryProvider {
+  children: ReactNode;
+}
+
+export function CentrinnoProvider({ children }: IStoryProvider) {
+
   const [stories, setStories] = useState([]);
   const [tags, setTags] = useState([]);
   useEffect(() => {

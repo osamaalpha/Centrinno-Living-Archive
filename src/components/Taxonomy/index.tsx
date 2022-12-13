@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
 import { useCentrinnoContext } from "../../context/storyContext";
+import { IContext } from "../../types/types";
 
 const Taxonomy = () => {
-  const { tags } = useCentrinnoContext();
+  const { tags } = useCentrinnoContext() as IContext;
 
   console.log("tags", tags);
 
@@ -10,16 +12,20 @@ const Taxonomy = () => {
       <div className="results">
         {tags?.length > 0 &&
           tags?.map((tag: any) => (
-            <>
-              <button key={tag.tag}>
-                <p>{tag.tag}</p>
-              </button>
-              {tag.categories?.length > 0 && (
+            <div key={tag.tag}>
+              <Link to={`/taxonomy/${tag}`}>
                 <button>
-                  <p> {tag.categories[0]}</p>
+                  <p>{tag.tag}</p>
                 </button>
+              </Link>
+              {tag.categories?.length > 0 && (
+                <Link to={`/taxonomy/${tag.categories[0]}`}>
+                  <button>
+                    <p> {tag.categories[0]}</p>
+                  </button>
+                </Link>
               )}
-            </>
+            </div>
           ))}
       </div>
     </main>
