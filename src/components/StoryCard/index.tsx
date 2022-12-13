@@ -18,7 +18,7 @@ const StoryCard = ({ image, title, summary }: StoryCardProps) => {
         <h3>{title}</h3>
         <p>{summary}</p>
       </div>
-      <Link to={`/${title.replaceAll(" ", "-")?.toLowerCase()}`}>go to story</Link>
+      <Link to={`/story/${title.replaceAll(" ", "-")?.toLowerCase()}`}>go to story</Link>
     </Card>
   );
 };

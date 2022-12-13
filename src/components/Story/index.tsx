@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { useStoryContext } from "../../context/storyContext";
+import { useCentrinnoContext } from "../../context/storyContext";
 import ImgHandler from "../ImgHandler";
 import { StoryPage } from "./styles";
 
 export const Story = () => {
-  const stories = useStoryContext();
+  const { stories } = useCentrinnoContext();
 
   const { slug } = useParams();
 
@@ -21,7 +21,6 @@ export const Story = () => {
       </div>
       {story && story.heroImage && (
         <div className="hero-component">
-          
           <ImgHandler
             imgSrc={story.heroImage as string}
             altText={story.heroImage.title as string}
@@ -29,7 +28,7 @@ export const Story = () => {
         </div>
       )}
       {story && story.summaryText}
-      <br/>
+      <br />
       {story && story.mainText}
     </StoryPage>
   );

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { backgroundColor, textColor } from "../../styles";
 
 export const GridSection = styled.div`
   position: relative;
@@ -8,5 +9,8 @@ export const GridSection = styled.div`
   place-items: center;
   align-items: stretch;
   justify-items: stretch;
-  padding: 100px 56px 0;
+  padding: 56px;
+  margin: 32px;
+  border: 1px solid ${textColor};
+  background-color: ${backgroundColor};
 `;

@@ -1,12 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useStoryContext } from "../../context/storyContext";
+import { useCentrinnoContext } from "../../context/storyContext";
 import { GridSection } from "./styles";
 import StoryCard from "../StoryCard";
 
-
 const Grid = () => {
-  const stories = useStoryContext();
+  const { stories } = useCentrinnoContext();
   console.log(stories);
   return (
     <GridSection className="">
@@ -16,11 +15,12 @@ const Grid = () => {
           //   to={`/${story.title.replaceAll(" ", "-")?.toLowerCase()}`}
           //   key={story.title.toLowerCase()}
           // >
-            <StoryCard
-              image={story.heroImage}
-              title={story.title}
-              summary={story.summaryText}
-            />
+          <StoryCard
+            image={story.heroImage}
+            title={story.title}
+            summary={story.summaryText}
+            key={story.title.toLowerCase()}
+          />
           // </Link>
         ))}
     </GridSection>

@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
 export const StoryPage = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 2;
   width: 100%;
-  display: block;
+  height: 100%;
+  overflow-y: scroll;
   background-color: lightgrey;
   .hero-component {
     height: 90vh;
