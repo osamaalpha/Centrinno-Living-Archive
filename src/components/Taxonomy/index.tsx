@@ -13,7 +13,7 @@ const Taxonomy = () => {
         {tags?.length > 0 &&
           tags?.map((tag: any) => (
             <div key={tag.tag}>
-              <Link to={`/taxonomy/${tag}`}>
+              <Link to={`/taxonomy/${tag.tag}`}>
                 <button>
                   <p>{tag.tag}</p>
                 </button>

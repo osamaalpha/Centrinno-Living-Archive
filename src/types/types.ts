@@ -8,8 +8,8 @@ export interface IStory {
   title: string;
   _id: string;
   heroImage: IImage;
-
   locations: string[];
+  tags: ITag[];
   peopleInvolved: string[];
 }
 
@@ -20,11 +20,11 @@ export interface IImage {
 }
 
 export interface ITag {
-  tag: string
-  categories: string[]
+  tag: string;
+  categories: string[];
 }
 
 export interface IContext {
-  stories: IStory[]
-  tags: ITag[]
+  stories: IStory[];
+  tags: ITag[];
 }
