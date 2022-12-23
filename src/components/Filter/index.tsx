@@ -1,13 +1,28 @@
 import { useParams } from "react-router-dom";
-import useReleatedStories from "../../hooks/useReleatedStories";
+import {
+  useSelectedTag,
+  useReleatedStories,
+} from "../../hooks/useReleatedStories";
+import { ITag } from "../../types/types";
+
 const Filter = () => {
   const { slug } = useParams();
 
   const releatedStories = useReleatedStories(slug as string);
 
+  const selectedVariable = useSelectedTag(slug as string);
+  const selectedCategory = selectedVariable.selectedCat;
+  const selectedTag = selectedVariable.selectedTag;
+
   return (
     <>
-      <h1>THIS IS A FILTER</h1>
+      <h1>
+        {selectedTag
+          ? selectedTag.tag
+          : selectedCategory
+          ? selectedCategory.categories[0]
+          : ""}
+      </h1>
     </>
   );
 };

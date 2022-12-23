@@ -1,5 +1,6 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import theme from "styled-theming";
+import PropTypes from "prop-types";
 
 export const backgroundColor = theme("mode", {
   light: "#d4d4d4",
@@ -7,16 +8,18 @@ export const backgroundColor = theme("mode", {
 });
 
 export const textColor = theme("mode", {
-    light: "#000000",
-    dark: "#ffffff"
-})
+  light: "#000000",
+  dark: "#ffffff",
+});
 
-const accentOne = "#6ccab4"
-
+export const buttonColor = theme.variants("mode", "variant", {
+  default: { light: "#0083c5", dark: "#6ccab4" },
+  alt: { light: "#6ccab4", darK: "#6ccab4" },
+  category: { light: "#f98d28", dark: "#f98d28" },
+  tag: { light: "#faaea5", dark: "#faaea5" },
+});
 
 export const GlobalStyles = createGlobalStyle`
-
-
 /* Box sizing rules */
 *,
 *::before,
@@ -109,15 +112,34 @@ body {
 }
 
 a {
-    color: ${accentOne};
+    color: ${textColor};
     text-decoration: none;
     display: inline-block;
+    font-weight: 800;
+    font-size: 14px;
+    text-transform: uppercase;
     * {
         color: ${textColor};
     }
-}
-
-
+  }
 `;
 
+export const Button = styled.button`
+  display: block;
+  background: ${buttonColor};
+  outline: none;
+  border-radius: 0;
+  border: 1px solid ${textColor};
+  color: ${textColor};
+  padding: 12px 25px;
+`;
 
+Button.propTypes = {
+  // @ts-ignore
+  variant: PropTypes.oneOf(["default", "category", "tag", "alt"]),
+};
+
+Button.defaultProps = {
+  // @ts-ignore
+  variant: "default",
+};

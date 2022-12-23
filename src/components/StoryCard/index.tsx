@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Button } from "../../styles";
 import ImgHandler from "../ImgHandler";
 import { Card } from "./styles";
 
@@ -17,8 +18,12 @@ const StoryCard = ({ image, title, summary }: StoryCardProps) => {
       <div className="story-info">
         <h3>{title}</h3>
         <p>{summary}</p>
+        <Button variant="alt">
+          <Link to={`/story/${title.replaceAll(" ", "-")?.toLowerCase()}`}>
+            READ
+          </Link>
+        </Button>
       </div>
-      <Link to={`/story/${title.replaceAll(" ", "-")?.toLowerCase()}`}>go to story</Link>
     </Card>
   );
 };

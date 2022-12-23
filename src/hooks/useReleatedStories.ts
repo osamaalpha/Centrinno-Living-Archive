@@ -1,7 +1,7 @@
 import { useCentrinnoContext } from "../context/storyContext";
-import { IContext, IStory } from "../types/types";
+import { IContext, IStory, ITag } from "../types/types";
 
-const useReleatedStories = (slug: string) => {
+export const useReleatedStories = (slug: string) => {
   const { stories } = useCentrinnoContext() as IContext;
 
   let relatedStories: IStory[] = [];
@@ -20,4 +20,10 @@ const useReleatedStories = (slug: string) => {
   return relatedStories;
 };
 
-export default useReleatedStories;
+export const useSelectedTag = (slug: string) => {
+  const { tags } = useCentrinnoContext() as IContext;
+
+  const selectedTag = tags.find((tag: ITag) => tag.tag === slug);
+  const selectedCat = tags.find((tag: ITag) => tag.categories[0] === slug);
+  return { selectedTag, selectedCat };
+};

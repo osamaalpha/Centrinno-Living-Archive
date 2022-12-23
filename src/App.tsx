@@ -17,17 +17,18 @@ function App() {
   return (
     <React.Fragment>
       <ThemeProvider theme={{ variant: "default", mode: "light" }}>
-        <GlobalStyles/>
+        <GlobalStyles />
         <CentrinnoProvider>
-          <Navigation/>
+          <Navigation />
           <Routes>
             <Route element={<Layout />}>
               <Route index element={<Home />}></Route>
               <Route path="/story/:slug" element={<Story />}></Route>
               <Route path="/*" element={<NoMatch />}></Route>
-              <Route path="/about" element={<About/>}></Route>
-              <Route path="/taxonomy" element={<Taxonomy />}></Route>
-              <Route path="/taxonomy/:slug" element={<Filter />}></Route>
+              <Route path="/about" element={<About />}></Route>
+              <Route path="/taxonomy" element={<Taxonomy />}>
+                <Route path="/taxonomy/:slug" element={<Filter />}></Route>
+              </Route>
             </Route>
           </Routes>
         </CentrinnoProvider>

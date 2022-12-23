@@ -1,18 +1,21 @@
 // import { IntroSection } from "./styles";
-
 import { Link } from "react-router-dom";
+import { Button } from "../../styles";
 import { NavigationBox } from "./styles";
 
 const Navigation = () => {
   return (
     <NavigationBox>
-      <div>
-        <Link to={`/about`}>About Centrinno</Link>{" "}
-      </div>
-      <div>
+      <Button variant="alt">
+        <Link to={`/`}>Home</Link>
+      </Button>
+      <Button variant="alt">
+        <Link to={`/about`}>About Centrinno</Link>
+      </Button>
+      <Button variant="alt">
         <Link to={`/taxonomy`}>Taxonomy</Link>
-      </div>
-      <button>Close</button>
+      </Button>
+      <Button variant="default">Close</Button>
     </NavigationBox>
   );
 };
