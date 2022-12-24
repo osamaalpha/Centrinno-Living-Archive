@@ -9,7 +9,7 @@ export const useReleatedStories = (slug: string) => {
   stories.forEach((story) =>
     story.tags.forEach(
       (tag) =>
-        (tag.tag === slug || tag.categories[0] === slug) &&
+        (tag.tag === slug || tag.category.category === slug) &&
         relatedStories.push(story)
     )
   );
@@ -24,6 +24,8 @@ export const useSelectedTag = (slug: string) => {
   const { tags } = useCentrinnoContext() as IContext;
 
   const selectedTag = tags.find((tag: ITag) => tag.tag === slug);
-  const selectedCat = tags.find((tag: ITag) => tag.categories[0] === slug);
+  const selectedCat = tags.find(
+    (tag: ITag) => tag.category.category === slug
+  );
   return { selectedTag, selectedCat };
 };

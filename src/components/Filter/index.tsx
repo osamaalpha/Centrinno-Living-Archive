@@ -3,7 +3,6 @@ import {
   useSelectedTag,
   useReleatedStories,
 } from "../../hooks/useReleatedStories";
-import { ITag } from "../../types/types";
 
 const Filter = () => {
   const { slug } = useParams();
@@ -17,12 +16,13 @@ const Filter = () => {
   return (
     <>
       <h1>
-        {selectedTag
-          ? selectedTag.tag
-          : selectedCategory
-          ? selectedCategory.categories[0]
-          : ""}
+        {selectedTag ? selectedTag.tag : selectedCategory?.category.category}
       </h1>
+      <p>
+        {selectedTag
+          ? selectedTag.definition
+          : selectedCategory?.category.definition}
+      </p>
     </>
   );
 };

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext, ReactNode } from "react";
-import ReactDOM from "react-dom/client";
 import client from "../sanityService";
 import { IContext, IStory, ITag } from "../types/types";
 
@@ -17,15 +16,15 @@ export function CentrinnoProvider({ children }: IStoryProvider) {
     async function fetchStories() {
       const storyQuery = `*[_type == "story"]{
         ...,
-        "tags": tags[]->{tag,"categories":categories[]->category}
+        "tags": tags[]->{tag,"category":categories->{category, definition}}
       }`;
 
       const storyData = await client.fetch(storyQuery);
-      const test: ITag[] = [];
+      const tagQuery: ITag[] = [];
       storyData.forEach((story: IStory) =>
-        story.tags.forEach((tag: ITag) => test.push(tag))
+        story.tags.forEach((tag: ITag) => tagQuery.push(tag))
       );
-      setTags(test);
+      setTags(tagQuery);
       setStories(storyData);
     }
     fetchStories();

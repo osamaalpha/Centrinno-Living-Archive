@@ -6,7 +6,6 @@ import { LayoutWrapper } from "./styles";
 const Layout = () => {
   const location = useLocation();
   const isStoryPage = location.pathname.includes("/story/");
-  console.log(isStoryPage);
   return (
     <LayoutWrapper className={`${isStoryPage && "blocked"}`}>
       <Intro />

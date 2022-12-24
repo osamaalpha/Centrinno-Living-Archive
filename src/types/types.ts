@@ -21,10 +21,19 @@ export interface IImage {
 
 export interface ITag {
   tag: string;
-  categories: string[];
+  definition: string;
+  category: {
+    category: string;
+    definition: string;
+  };
 }
 
 export interface IContext {
   stories: IStory[];
   tags: ITag[];
+}
+
+export interface IResult {
+  result: string
+  isTag: boolean
 }
