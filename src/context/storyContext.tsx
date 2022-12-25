@@ -16,7 +16,7 @@ export function CentrinnoProvider({ children }: IStoryProvider) {
     async function fetchStories() {
       const storyQuery = `*[_type == "story"]{
         ...,
-        "tags": tags[]->{tag,"category":categories->{category, definition}}
+        "tags": tags[]->{tag, definition,"category":categories->{category, definition}}
       }`;
 
       const storyData = await client.fetch(storyQuery);

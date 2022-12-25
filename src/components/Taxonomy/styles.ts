@@ -19,6 +19,8 @@ export const TaxonomyPage = styled.main`
   div.results {
     display: flex;
     flex-wrap: wrap;
+    row-gap: 8px;
+    
     .filter-element {
         button {
             margin-right: 8px;

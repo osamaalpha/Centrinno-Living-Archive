@@ -25,9 +25,17 @@ export const Card = styled.div`
   .story-info {
     heigth: 40%;
     padding: 24px;
+    
+    p {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
 
     button {
-        margin-top: 16px;
+      margin-top: 16px;
     }
   }
 `;

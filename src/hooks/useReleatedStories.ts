@@ -1,4 +1,5 @@
 import { useCentrinnoContext } from "../context/storyContext";
+import { normalizeString } from "../helpers/normalizeStrings";
 import { IContext, IStory, ITag } from "../types/types";
 
 export const useReleatedStories = (slug: string) => {
@@ -9,7 +10,8 @@ export const useReleatedStories = (slug: string) => {
   stories.forEach((story) =>
     story.tags.forEach(
       (tag) =>
-        (tag.tag === slug || tag.category.category === slug) &&
+        (normalizeString(tag.tag).toLowerCase() === slug ||
+        normalizeString(tag.category.category)?.toLowerCase() === slug) &&
         relatedStories.push(story)
     )
   );
@@ -18,14 +20,19 @@ export const useReleatedStories = (slug: string) => {
       index === self.findIndex((t: IStory) => t._id === value._id)
   );
   return relatedStories;
-};
+};  
 
 export const useSelectedTag = (slug: string) => {
   const { tags } = useCentrinnoContext() as IContext;
 
-  const selectedTag = tags.find((tag: ITag) => tag.tag === slug);
+  const selectedTag = tags.find(
+    (tag: ITag) => normalizeString(tag.tag).toLowerCase() === slug
+  );
   const selectedCat = tags.find(
-    (tag: ITag) => tag.category.category === slug
+    (tag: ITag) =>
+    normalizeString(tag.category.category).toLowerCase() === slug
   );
   return { selectedTag, selectedCat };
 };
+
+// .replaceAll(" ", "-")?

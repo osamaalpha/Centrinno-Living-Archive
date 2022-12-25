@@ -1,5 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import { useCentrinnoContext } from "../../context/storyContext";
+import { normalizeString } from "../../helpers/normalizeStrings";
 import { Button } from "../../styles";
 import { IContext, IResult, ITag } from "../../types/types";
 import { TaxonomyPage } from "./styles";
@@ -24,9 +25,9 @@ const Taxonomy = () => {
       filterResults.push({ result: value.category.category, isTag: false })
   );
 
-  const shuffledResults = filterResults.sort(
-    (a: IResult, b: IResult) => 0.5 - Math.random()
-  );
+  const shuffledResults = filterResults
+    .sort((a: IResult, b: IResult) => 0.5 - Math.random())
+    .splice(0, 25);
 
   return (
     <TaxonomyPage>
@@ -36,7 +37,7 @@ const Taxonomy = () => {
       <div className="results">
         {shuffledResults.map((item: IResult, index: number) => (
           <div key={index} className="filter-element">
-            <Link key={index} to={`/taxonomy/${item.result}`}>
+            <Link key={index} to={`/taxonomy/${normalizeString(item.result).toLowerCase()}`}>
               <Button variant={`${item.isTag ? "tag" : "category"}`}>
                 <p> {item.result}</p>
               </Button>

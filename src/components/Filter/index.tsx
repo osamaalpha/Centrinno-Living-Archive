@@ -3,6 +3,7 @@ import {
   useSelectedTag,
   useReleatedStories,
 } from "../../hooks/useReleatedStories";
+import NetworkGraph from "../NetworkGraph";
 
 const Filter = () => {
   const { slug } = useParams();
@@ -12,6 +13,8 @@ const Filter = () => {
   const selectedVariable = useSelectedTag(slug as string);
   const selectedCategory = selectedVariable.selectedCat;
   const selectedTag = selectedVariable.selectedTag;
+
+  console.log(selectedTag)
 
   return (
     <>
@@ -23,6 +26,7 @@ const Filter = () => {
           ? selectedTag.definition
           : selectedCategory?.category.definition}
       </p>
+      <NetworkGraph />
     </>
   );
 };
