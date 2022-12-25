@@ -1,8 +1,10 @@
 // @ts-nocheck
 
+import { useEffect, useState } from "react";
 import { Graph } from "react-d3-graph";
 
 const NetworkGraph = () => {
+  const [graphConfig, setGrapghConfig] = useState({});
   // graph payload (with minimalist structure)
   const data = {
     nodes: [{ id: "Harry" }, { id: "Sally" }, { id: "Alice" }],
@@ -16,7 +18,6 @@ const NetworkGraph = () => {
   const myConfig = {
     directed: true,
     automaticRearrangeAfterDropNode: true,
-    collapsible: true,
     height: 500,
     highlightDegree: 2,
     highlightOpacity: 0.2,
@@ -36,24 +37,24 @@ const NetworkGraph = () => {
       linkStrength: 2,
     },
     node: {
-        color: '#d3d3d3',
-        fontColor: 'black',
-        fontSize: 10,
-        fontWeight: 'normal',
-        highlightColor: 'red',
-        highlightFontSize: 14,
-        highlightFontWeight: 'bold',
-        highlightStrokeColor: 'red',
-        highlightStrokeWidth: 1.5,
-        mouseCursor: 'crosshair',
-        opacity: 0.9,
-        renderLabel: true,
-        size: 200,
-        strokeColor: 'blue',
-        strokeWidth: 1.5,
-        svg: '',
-        symbolType: 'circle',
-        viewGenerator: null,
+      color: "#d3d3d3",
+      fontColor: "black",
+      fontSize: 10,
+      fontWeight: "normal",
+      highlightColor: "red",
+      highlightFontSize: 14,
+      highlightFontWeight: "bold",
+      highlightStrokeColor: "red",
+      highlightStrokeWidth: 1.5,
+      mouseCursor: "crosshair",
+      opacity: 0.9,
+      renderLabel: true,
+      size: 200,
+      strokeColor: "blue",
+      strokeWidth: 1.5,
+      svg: "",
+      symbolType: "circle",
+      viewGenerator: null,
     },
     link: {
       color: "red",
@@ -65,6 +66,9 @@ const NetworkGraph = () => {
       type: "STRAIGHT",
     },
   };
+  useEffect(() => {
+    setGrapghConfig(myConfig);
+  }, []);
 
   const onClickNode = function (nodeId: string) {
     window.alert(`Clicked node ${nodeId}`);
@@ -78,7 +82,7 @@ const NetworkGraph = () => {
     <Graph
       id="graph-id" // id is mandatory
       data={data}
-      config={myConfig}
+      config={graphConfig}
       onClickNode={onClickNode}
       onClickLink={onClickLink}
       initialZoom={200}
