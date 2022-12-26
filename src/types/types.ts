@@ -1,4 +1,5 @@
 export interface IStory {
+  [x: string]: any;
   author: string;
   mainText: string;
   pilot: string;
@@ -11,6 +12,7 @@ export interface IStory {
   locations: string[];
   tags: ITag[];
   peopleInvolved: string[];
+  relatedStories: IStory[];
 }
 
 export interface IImage {
@@ -28,12 +30,20 @@ export interface ITag {
   };
 }
 
+export interface ICat {
+  category: string;
+  definition: string;
+  relatedTags: ITag[]
+  tag: string
+}
+
 export interface IContext {
   stories: IStory[];
   tags: ITag[];
+  categories: ICat[];
 }
 
 export interface IResult {
-  result: string
-  isTag: boolean
+  result: string;
+  isTag: boolean;
 }

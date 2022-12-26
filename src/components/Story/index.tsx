@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useCentrinnoContext } from "../../context/storyContext";
+import { Button } from "../../styles";
 import { IContext } from "../../types/types";
 import ImgHandler from "../ImgHandler";
 import { StoryPage } from "./styles";
@@ -17,9 +18,9 @@ export const Story = () => {
   return (
     <StoryPage key={story?._id}>
       <h1>{story?.title}</h1>
-      <div className="back-button">
+      <Button className="back-button" variant="default">
         <Link to={"/"}> BACK </Link>
-      </div>
+      </Button>
       {story && story.heroImage && (
         <div className="hero-component">
           <ImgHandler

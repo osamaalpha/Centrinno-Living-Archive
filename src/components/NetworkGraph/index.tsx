@@ -2,16 +2,69 @@
 
 import { useEffect, useState } from "react";
 import { Graph } from "react-d3-graph";
+import { IStory } from "../../types/types";
 
-const NetworkGraph = () => {
+interface NetworkGraphProps {
+  selectedVariable: ITag | ICat;
+  relatedStories: IStory[];
+}
+
+const NetworkGraph = ({
+  selectedVariable,
+  relatedStories,
+}: NetworkGraphProps) => {
   const [graphConfig, setGrapghConfig] = useState({});
+  const [graphData, setGraphData] = useState({});
   // graph payload (with minimalist structure)
-  const data = {
-    nodes: [{ id: "Harry" }, { id: "Sally" }, { id: "Alice" }],
-    links: [
-      { source: "Harry", target: "Sally" },
-      { source: "Harry", target: "Alice" },
-    ],
+
+  //   console.log("selected category", selectedCategory);
+
+  const relatedStoriesNode = relatedStories.map((story: IStory) => {
+    return { id: story.title };
+  });
+
+  const isCat = !!selectedVariable?.relatedTags;
+
+  const firstNode = isCat
+    ? { id: selectedVariable?.category }
+    : { id: selectedVariable?.tag };
+
+  const linkedTagNodes = selectedVariable?.relatedTags?.map((relatedTag) => {
+    return {
+      id: relatedTag.tag,
+    };
+  });
+
+  const secondNode = isCat
+    ? linkedTagNodes
+    : [{ id: selectedVariable?.category.category }];
+
+  const storiesLinks = relatedStories.map((story: IStory) => {
+    return {
+      source: isCat ? selectedVariable?.category : selectedVariable?.tag,
+      target: story?.title,
+    };
+  });
+
+  const tagLinks = selectedVariable?.relatedTags?.map((relatedTag) => {
+    return {
+      source: selectedVariable?.category,
+      target: relatedTag?.tag,
+    };
+  });
+
+  const firstLinks = isCat
+    ? tagLinks
+    : [
+        {
+          source: selectedVariable?.tag,
+          target: selectedVariable?.category.category,
+        },
+      ];
+
+  const myData = {
+    nodes: [firstNode, ...secondNode, ...relatedStoriesNode],
+    links: [...firstLinks, ...storiesLinks],
   };
 
   // the graph configuration, just override the ones you need
@@ -68,6 +121,7 @@ const NetworkGraph = () => {
   };
   useEffect(() => {
     setGrapghConfig(myConfig);
+    // setGraphData(myData);
   }, []);
 
   const onClickNode = function (nodeId: string) {
@@ -81,7 +135,7 @@ const NetworkGraph = () => {
   return (
     <Graph
       id="graph-id" // id is mandatory
-      data={data}
+      data={myData}
       config={graphConfig}
       onClickNode={onClickNode}
       onClickLink={onClickLink}

@@ -27,7 +27,7 @@ const Taxonomy = () => {
 
   const shuffledResults = filterResults
     .sort((a: IResult, b: IResult) => 0.5 - Math.random())
-    .splice(0, 25);
+    .splice(0, 40);
 
   return (
     <TaxonomyPage>
