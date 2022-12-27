@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useCentrinnoContext } from "../../context/storyContext";
 import { Button } from "../../styles";
@@ -15,12 +15,16 @@ export const Story = () => {
     (story: any) => story.title.replaceAll(" ", "-")?.toLowerCase() === slug
   );
 
+  const navigate = useNavigate();
+  
   return (
     <StoryPage key={story?._id}>
       <h1>{story?.title}</h1>
-      <Button className="back-button" variant="default">
-        <Link to={"/"}> BACK </Link>
-      </Button>
+      <Button
+        className="back-button"
+        variant="default"
+        onClick={() => navigate(-1)}
+      />
       {story && story.heroImage && (
         <div className="hero-component">
           <ImgHandler
