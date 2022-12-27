@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   useSelectedVariable,
   useReleatedStories,
 } from "../../hooks/useReleatedStories";
-import { ICat, ITag } from "../../types/types";
 import NetworkGraph from "../NetworkGraph";
 
 const Filter = () => {
@@ -20,7 +18,6 @@ const Filter = () => {
       <h1>{title}</h1>
       <p>{definition}</p>
       <NetworkGraph
-        selectedVariable={selectedVariable}
         relatedStories={releatedStories}
       />
     </>

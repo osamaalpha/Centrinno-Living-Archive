@@ -2,42 +2,47 @@
 
 import { useEffect, useState } from "react";
 import { Graph } from "react-d3-graph";
+import { useSelectedVariable } from "../../hooks/useReleatedStories";
+import { useParams } from "react-router-dom";
+
 import { IStory } from "../../types/types";
 
 interface NetworkGraphProps {
-  selectedVariable: ITag | ICat;
+  //   selectedVariable: ITag | ICat;
   relatedStories: IStory[];
 }
 
-const NetworkGraph = ({
-  selectedVariable,
-  relatedStories,
-}: NetworkGraphProps) => {
+const NetworkGraph = ({ relatedStories }: NetworkGraphProps) => {
+  const { slug } = useParams();
+  const selectedVariable = useSelectedVariable(slug as string);
   const [graphConfig, setGrapghConfig] = useState({});
   const [graphData, setGraphData] = useState({});
+
+  console.log(selectedVariable);
+
   // graph payload (with minimalist structure)
 
-  //   console.log("selected category", selectedCategory);
-
   const relatedStoriesNode = relatedStories.map((story: IStory) => {
-    return { id: story.title };
+    return { id: story.title, color: 'green', size: 500, symbolType: 'square' };
   });
 
   const isCat = !!selectedVariable?.relatedTags;
 
   const firstNode = isCat
-    ? { id: selectedVariable?.category }
-    : { id: selectedVariable?.tag };
+    ? { id: selectedVariable?.category, color: 'blue', symbolType: 'circle', size: 2600 }
+    : { id: selectedVariable?.tag, color: 'orange', symbolType: 'triangle', size: 2600 };
 
   const linkedTagNodes = selectedVariable?.relatedTags?.map((relatedTag) => {
     return {
       id: relatedTag.tag,
+      color: 'orange',
+      symbolType: 'triangle',
     };
   });
 
   const secondNode = isCat
     ? linkedTagNodes
-    : [{ id: selectedVariable?.category.category }];
+    : [{ id: selectedVariable?.category.category, color: 'blue', symbolType: 'circle' }];
 
   const storiesLinks = relatedStories.map((story: IStory) => {
     return {
@@ -59,6 +64,7 @@ const NetworkGraph = ({
         {
           source: selectedVariable?.tag,
           target: selectedVariable?.category.category,
+          strokeLinecap: 'square'
         },
       ];
 
@@ -70,7 +76,7 @@ const NetworkGraph = ({
   // the graph configuration, just override the ones you need
   const myConfig = {
     directed: true,
-    automaticRearrangeAfterDropNode: true,
+    width: 900,
     height: 500,
     highlightDegree: 2,
     highlightOpacity: 0.2,
@@ -82,29 +88,25 @@ const NetworkGraph = ({
     staticGraph: false,
     staticGraphWithDragAndDrop: false,
     freezeAllDragEvents: true,
-    width: 500,
     d3: {
       alphaTarget: 0.05,
-      gravity: -250,
-      linkLength: 120,
+      gravity: -200,
+      linkLength: 150,
       linkStrength: 2,
     },
     node: {
-      color: "#d3d3d3",
       fontColor: "black",
-      fontSize: 10,
+      fontSize: 16,
       fontWeight: "normal",
       highlightColor: "red",
-      highlightFontSize: 14,
+      highlightFontSize: 16,
       highlightFontWeight: "bold",
       highlightStrokeColor: "red",
       highlightStrokeWidth: 1.5,
-      mouseCursor: "crosshair",
-      opacity: 0.9,
+      mouseCursor: "pointer",
+      opacity: 1,
+      size: 500,
       renderLabel: true,
-      size: 200,
-      strokeColor: "blue",
-      strokeWidth: 1.5,
       svg: "",
       symbolType: "circle",
       viewGenerator: null,
@@ -114,9 +116,9 @@ const NetworkGraph = ({
       highlightColor: "red",
       mouseCursor: "pointer",
       opacity: 1,
-      semanticStrokeWidth: true,
-      strokeWidth: 3,
-      type: "STRAIGHT",
+      strokeWidth: 1,
+      type: 'STRAIGHT',
+      strokeLinecap: 'round'
     },
   };
   useEffect(() => {
@@ -124,8 +126,8 @@ const NetworkGraph = ({
     // setGraphData(myData);
   }, []);
 
-  const onClickNode = function (nodeId: string) {
-    window.alert(`Clicked node ${nodeId}`);
+  const onClickNode = function (node) {
+   console.log(node)
   };
 
   const onClickLink = function (source: any, target: any) {
@@ -139,7 +141,7 @@ const NetworkGraph = ({
       config={graphConfig}
       onClickNode={onClickNode}
       onClickLink={onClickLink}
-      initialZoom={200}
+      initialZoom={500}
     />
   );
 };
