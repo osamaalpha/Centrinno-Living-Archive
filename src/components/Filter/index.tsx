@@ -15,11 +15,16 @@ const Filter = () => {
 
   return (
     <>
-      <h1>{title}</h1>
-      <p>{definition}</p>
-      <NetworkGraph
-        relatedStories={releatedStories}
-      />
+      {selectedVariable?.category && releatedStories?.length > 0 && (
+        <>
+          <h1>{title}</h1>
+          <p>{definition}</p>
+          <NetworkGraph
+            selectedVariable={selectedVariable}
+            relatedStories={releatedStories}
+          />
+        </>
+      )}
     </>
   );
 };

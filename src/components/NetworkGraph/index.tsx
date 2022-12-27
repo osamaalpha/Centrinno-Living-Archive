@@ -2,47 +2,58 @@
 
 import { useEffect, useState } from "react";
 import { Graph } from "react-d3-graph";
-import { useSelectedVariable } from "../../hooks/useReleatedStories";
-import { useParams } from "react-router-dom";
-
 import { IStory } from "../../types/types";
 
 interface NetworkGraphProps {
-  //   selectedVariable: ITag | ICat;
+  selectedVariable: ITag | ICat;
   relatedStories: IStory[];
 }
 
-const NetworkGraph = ({ relatedStories }: NetworkGraphProps) => {
-  const { slug } = useParams();
-  const selectedVariable = useSelectedVariable(slug as string);
+const NetworkGraph = ({
+  relatedStories,
+  selectedVariable,
+}: NetworkGraphProps) => {
   const [graphConfig, setGrapghConfig] = useState({});
-  const [graphData, setGraphData] = useState({});
-
-  console.log(selectedVariable);
 
   // graph payload (with minimalist structure)
 
   const relatedStoriesNode = relatedStories.map((story: IStory) => {
-    return { id: story.title, color: 'green', size: 500, symbolType: 'square' };
+    return { id: story.title, color: "green", size: 500, symbolType: "square" };
   });
 
   const isCat = !!selectedVariable?.relatedTags;
 
   const firstNode = isCat
-    ? { id: selectedVariable?.category, color: 'blue', symbolType: 'circle', size: 2600 }
-    : { id: selectedVariable?.tag, color: 'orange', symbolType: 'triangle', size: 2600 };
+    ? {
+        id: selectedVariable?.category,
+        color: "blue",
+        symbolType: "circle",
+        size: 2600,
+      }
+    : {
+        id: selectedVariable?.tag,
+        color: "orange",
+        symbolType: "triangle",
+        size: 2600,
+      };
 
   const linkedTagNodes = selectedVariable?.relatedTags?.map((relatedTag) => {
     return {
       id: relatedTag.tag,
-      color: 'orange',
-      symbolType: 'triangle',
+      color: "orange",
+      symbolType: "triangle",
     };
   });
 
   const secondNode = isCat
     ? linkedTagNodes
-    : [{ id: selectedVariable?.category.category, color: 'blue', symbolType: 'circle' }];
+    : [
+        {
+          id: selectedVariable?.category.category,
+          color: "blue",
+          symbolType: "circle",
+        },
+      ];
 
   const storiesLinks = relatedStories.map((story: IStory) => {
     return {
@@ -64,7 +75,7 @@ const NetworkGraph = ({ relatedStories }: NetworkGraphProps) => {
         {
           source: selectedVariable?.tag,
           target: selectedVariable?.category.category,
-          strokeLinecap: 'square'
+          strokeLinecap: "square",
         },
       ];
 
@@ -117,8 +128,8 @@ const NetworkGraph = ({ relatedStories }: NetworkGraphProps) => {
       mouseCursor: "pointer",
       opacity: 1,
       strokeWidth: 1,
-      type: 'STRAIGHT',
-      strokeLinecap: 'round'
+      type: "STRAIGHT",
+      strokeLinecap: "round",
     },
   };
   useEffect(() => {
@@ -127,7 +138,7 @@ const NetworkGraph = ({ relatedStories }: NetworkGraphProps) => {
   }, []);
 
   const onClickNode = function (node) {
-   console.log(node)
+    console.log(node);
   };
 
   const onClickLink = function (source: any, target: any) {
