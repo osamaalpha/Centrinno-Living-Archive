@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { Graph } from "react-d3-graph";
 import { IStory } from "../../types/types";
+import { useNavigate } from "react-router-dom";
+import { normalizeString } from "../../helpers/normalizeStrings";
 
 interface NetworkGraphProps {
   selectedVariable: ITag | ICat;
@@ -14,6 +16,7 @@ const NetworkGraph = ({
   selectedVariable,
 }: NetworkGraphProps) => {
   const [graphConfig, setGrapghConfig] = useState({});
+  const navigate = useNavigate();
 
   // graph payload (with minimalist structure)
 
@@ -134,11 +137,14 @@ const NetworkGraph = ({
   };
   useEffect(() => {
     setGrapghConfig(myConfig);
-    // setGraphData(myData);
   }, []);
 
-  const onClickNode = function (node) {
-    console.log(node);
+  const onClickNode = function (node, event) {
+    if (event.color === "green") {
+      navigate(`/story/${normalizeString(node).toLocaleLowerCase()}`);
+    } else {
+      navigate(`/taxonomy/${normalizeString(node).toLocaleLowerCase()}`);
+    }
   };
 
   const onClickLink = function (source: any, target: any) {
