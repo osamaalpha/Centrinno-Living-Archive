@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import { useCentrinnoContext } from "../../context/storyContext";
-import { normalizeString } from "../../helpers/normalizeStrings";
+import { slugify } from "../../helpers/slugify";
 import { Button } from "../../styles";
 import { IContext, IResult, ITag } from "../../types/types";
 import { TaxonomyPage } from "./styles";
@@ -32,18 +32,19 @@ const Taxonomy = () => {
   return (
     <TaxonomyPage>
       <Outlet />
-      <h2> Results</h2>
-
-      <div className="results">
-        {shuffledResults.map((item: IResult, index: number) => (
-          <div key={index} className="filter-element">
-            <Link key={index} to={`/taxonomy/${normalizeString(item.result).toLowerCase()}`}>
-              <Button variant={`${item.isTag ? "tag" : "category"}`}>
-                <p> {item.result}</p>
-              </Button>
-            </Link>
-          </div>
-        ))}
+      <div className="default-page">
+        <h2> The Centrinno Network Taxonomy - Select a Tag or Category from the list</h2>
+        <div className="results">
+          {shuffledResults.map((item: IResult, index: number) => (
+            <div key={index} className="filter-element">
+              <Link key={index} to={`/taxonomy/${slugify(item.result)}`}>
+                <Button variant={`${item.isTag ? "tag" : "category"}`}>
+                  <p> {item.result}</p>
+                </Button>
+              </Link>
+            </div>
+          ))}
+        </div>
       </div>
     </TaxonomyPage>
   );

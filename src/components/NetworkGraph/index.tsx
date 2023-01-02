@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Graph } from "react-d3-graph";
 import { IStory } from "../../types/types";
 import { useNavigate } from "react-router-dom";
-import { normalizeString } from "../../helpers/normalizeStrings";
+import { slugify } from "../../helpers/slugify";
 
 interface NetworkGraphProps {
   selectedVariable: ITag | ICat;
@@ -62,6 +62,7 @@ const NetworkGraph = ({
     return {
       source: isCat ? selectedVariable?.category : selectedVariable?.tag,
       target: story?.title,
+      type: "CURVE_SMOOTH",
     };
   });
 
@@ -87,11 +88,21 @@ const NetworkGraph = ({
     links: [...firstLinks, ...storiesLinks],
   };
 
+  useEffect(() => {
+    setGrapghConfig(myConfig);
+  }, []);
+
+  //   useEffect(() => {
+  //     setRealHeight(containerRef.current.offsetHeight);
+  //     setRealWidth(containerRef.current.offsetWidth);
+  //   }, []);
+
+  // const width = containerRef.current.offsetWidth;
+  // const height = containerRef.current.offsetHeight;
+
   // the graph configuration, just override the ones you need
   const myConfig = {
-    directed: true,
-    width: 900,
-    height: 500,
+    directed: false,
     highlightDegree: 2,
     highlightOpacity: 0.2,
     linkHighlightBehavior: true,
@@ -99,25 +110,24 @@ const NetworkGraph = ({
     minZoom: 1,
     nodeHighlightBehavior: true, // comment this to reset nodes positions to work
     panAndZoom: false,
-    staticGraph: false,
-    staticGraphWithDragAndDrop: false,
     freezeAllDragEvents: true,
     d3: {
-      alphaTarget: 0.05,
-      gravity: -200,
-      linkLength: 150,
+      alphaTarget: 10,
+      gravity: -350,
+      linkLength: 350,
       linkStrength: 2,
     },
     node: {
       fontColor: "black",
       fontSize: 16,
       fontWeight: "normal",
-      highlightColor: "red",
+      highlightColor: "blue",
       highlightFontSize: 16,
       highlightFontWeight: "bold",
-      highlightStrokeColor: "red",
-      highlightStrokeWidth: 1.5,
+      highlightStrokeColor: "blue",
+      highlightStrokeWidth: 1,
       mouseCursor: "pointer",
+      labelPosition: "bottom",
       opacity: 1,
       size: 500,
       renderLabel: true,
@@ -126,8 +136,8 @@ const NetworkGraph = ({
       viewGenerator: null,
     },
     link: {
-      color: "red",
-      highlightColor: "red",
+      color: "blue",
+      highlightColor: "blue",
       mouseCursor: "pointer",
       opacity: 1,
       strokeWidth: 1,
@@ -135,20 +145,13 @@ const NetworkGraph = ({
       strokeLinecap: "round",
     },
   };
-  useEffect(() => {
-    setGrapghConfig(myConfig);
-  }, []);
 
   const onClickNode = function (node, event) {
     if (event.color === "green") {
-      navigate(`/story/${normalizeString(node).toLocaleLowerCase()}`);
+      navigate(`/story/${slugify(node)}`);
     } else {
-      navigate(`/taxonomy/${normalizeString(node).toLocaleLowerCase()}`);
+      navigate(`/taxonomy/${slugify(node)}`);
     }
-  };
-
-  const onClickLink = function (source: any, target: any) {
-    window.alert(`Clicked link between ${source} and ${target}`);
   };
 
   return (
@@ -157,8 +160,7 @@ const NetworkGraph = ({
       data={myData}
       config={graphConfig}
       onClickNode={onClickNode}
-      onClickLink={onClickLink}
-      initialZoom={500}
+      initialZoom={0}
     />
   );
 };

@@ -1,5 +1,5 @@
 import { useCentrinnoContext } from "../context/storyContext";
-import { normalizeString } from "../helpers/normalizeStrings";
+import { slugify } from "../helpers/slugify";
 import { ICat, IContext, IStory, ITag } from "../types/types";
 
 export const useReleatedStories = (slug: string) => {
@@ -10,8 +10,8 @@ export const useReleatedStories = (slug: string) => {
   stories.forEach((story) =>
     story.tags.forEach(
       (tag) =>
-        (normalizeString(tag.tag).toLowerCase() === slug ||
-          normalizeString(tag.category.category)?.toLowerCase() === slug) &&
+        (slugify(tag.tag).toLowerCase() === slug ||
+        slugify(tag.category.category) === slug) &&
         relatedStories.push(story)
     )
   );
@@ -26,11 +26,11 @@ export const useSelectedVariable = (slug: string) => {
   const { tags, categories } = useCentrinnoContext() as IContext;
 
   const selectedTag = tags.find(
-    (tag: ITag) => normalizeString(tag.tag).toLowerCase() === slug
+    (tag: ITag) => slugify(tag.tag) === slug
   );
 
   const linkedTags = categories.find(
-    (cat: ICat) => normalizeString(cat.category).toLowerCase() === slug
+    (cat: ICat) => slugify(cat.category) === slug
   );
 
   return selectedTag || linkedTags;

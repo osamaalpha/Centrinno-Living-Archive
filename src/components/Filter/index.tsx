@@ -4,6 +4,7 @@ import {
   useReleatedStories,
 } from "../../hooks/useReleatedStories";
 import NetworkGraph from "../NetworkGraph";
+import { FilterSection } from "./styles";
 
 const Filter = () => {
   const { slug } = useParams();
@@ -16,14 +17,18 @@ const Filter = () => {
   return (
     <>
       {selectedVariable?.category && releatedStories?.length > 0 && (
-        <>
-          <h1>{title}</h1>
-          <p>{definition}</p>
-          <NetworkGraph
-            selectedVariable={selectedVariable}
-            relatedStories={releatedStories}
-          />
-        </>
+        <FilterSection>
+          <div className="intro-text">
+            <h1>{title}</h1>
+            <p>{definition}</p>
+          </div>
+          <div className="graph-container">
+            <NetworkGraph
+              selectedVariable={selectedVariable}
+              relatedStories={releatedStories}
+            />
+          </div>
+        </FilterSection>
       )}
     </>
   );
