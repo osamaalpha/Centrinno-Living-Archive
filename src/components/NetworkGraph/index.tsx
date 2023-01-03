@@ -1,5 +1,4 @@
 // @ts-nocheck
-
 import { useEffect, useState } from "react";
 import { Graph } from "react-d3-graph";
 import { IStory } from "../../types/types";
@@ -91,14 +90,6 @@ const NetworkGraph = ({
   useEffect(() => {
     setGrapghConfig(myConfig);
   }, []);
-
-  //   useEffect(() => {
-  //     setRealHeight(containerRef.current.offsetHeight);
-  //     setRealWidth(containerRef.current.offsetWidth);
-  //   }, []);
-
-  // const width = containerRef.current.offsetWidth;
-  // const height = containerRef.current.offsetHeight;
 
   // the graph configuration, just override the ones you need
   const myConfig = {

@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { textColor } from "../../styles";
 
 export const FilterSection = styled.section`
-position: relative;
+position: sticky;
+top: 0;
 width: 100%;
 display: flex;
 flex-direction: row;
@@ -17,6 +18,7 @@ padding: 0;
         aspect-ratio: 1;
     }
     .intro-text {
+        position: relative;
         width: 50%;
         border-right: 1px solid ${textColor};
         display: flex;
@@ -24,6 +26,15 @@ padding: 0;
         justify-content: flex-start;
         align-items: flex-start;
         padding: 32px;
+        .default-page {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            border-top: 1px solid ${textColor};
+            border-right: 0;
+            margin: 0 -1px 0px -1px;
+        }
     }
     .graph-container {
         padding: 0;

@@ -1,9 +1,12 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
   useSelectedVariable,
   useReleatedStories,
 } from "../../hooks/useReleatedStories";
+import Grid from "../Grid";
 import NetworkGraph from "../NetworkGraph";
+import Results from "../Results";
 import { FilterSection } from "./styles";
 
 const Filter = () => {
@@ -14,21 +17,26 @@ const Filter = () => {
     (selectedVariable?.tag as string) || (selectedVariable?.category as string);
   const definition = selectedVariable?.definition;
 
+
   return (
     <>
       {selectedVariable?.category && releatedStories?.length > 0 && (
-        <FilterSection>
-          <div className="intro-text">
-            <h1>{title}</h1>
-            <p>{definition}</p>
-          </div>
-          <div className="graph-container">
-            <NetworkGraph
-              selectedVariable={selectedVariable}
-              relatedStories={releatedStories}
-            />
-          </div>
-        </FilterSection>
+        <>
+          <FilterSection>
+            <div className="intro-text">
+              <h1>{title}</h1>
+              <p>{definition}</p>
+              <Results limit={10} />
+            </div>
+            <div className="graph-container">
+              <NetworkGraph
+                selectedVariable={selectedVariable}
+                relatedStories={releatedStories}
+              />
+            </div>
+          </FilterSection>
+          <Grid relatedStories={releatedStories} />
+        </>
       )}
     </>
   );

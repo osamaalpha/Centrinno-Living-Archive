@@ -7,14 +7,19 @@ export const backgroundColor = theme("mode", {
   dark: "#000000",
 });
 
+export const accentColor = theme("mode", {
+  light: "#D5EFEF",
+  dark: "#D5EFEF",
+});
+
 export const textColor = theme("mode", {
   light: "#000000",
   dark: "#ffffff",
 });
 
 export const buttonColor = theme.variants("mode", "variant", {
-  default: { light: "#0083c5", dark: "#6ccab4" },
-  alt: { light: "#6ccab4", darK: "#6ccab4" },
+  default: { light: "#CFD4FF", dark: "#CFD4FF" },
+  alt: { light: "#D5EFEF", darK: "#D5EFEF" },
   category: { light: "#f98d28", dark: "#f98d28" },
   tag: { light: "#faaea5", dark: "#faaea5" },
 });

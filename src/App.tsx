@@ -1,8 +1,7 @@
 import { Story } from "./components/Story";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { CentrinnoProvider } from "./context/storyContext";
 import { ThemeProvider } from "styled-components";
-import Grid from "./components/Grid";
 import React from "react";
 import { GlobalStyles } from "./styles";
 import Layout from "./components/Layout/Layout";

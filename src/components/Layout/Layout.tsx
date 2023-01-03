@@ -9,7 +9,7 @@ const Layout = () => {
   return (
     <LayoutWrapper className={`${isStoryPage && "blocked"}`}>
       <Intro />
-      <Grid />
+      <Grid relatedStories={[]}/>
       <Outlet />
     </LayoutWrapper>
   );
