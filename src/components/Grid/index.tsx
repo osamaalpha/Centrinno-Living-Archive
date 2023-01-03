@@ -15,14 +15,12 @@ const Grid = ({ relatedStories }: GridProps) => {
   useEffect(() => {
     if (relatedStories && relatedStories.length > 0) {
       setGridStories(relatedStories);
-      console.log('getting related stories')
     }
   }, [relatedStories]);
 
   useEffect(() => {
     if (stories.length > 0 && relatedStories && relatedStories?.length < 1) {
       setGridStories(stories);
-      console.log('getting just stories')
     }
   }, [stories]);
 

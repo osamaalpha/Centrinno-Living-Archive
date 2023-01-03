@@ -12,9 +12,7 @@ interface StoryCardProps {
 const StoryCard = ({ image, title, summary }: StoryCardProps) => {
   return (
     <Card key={title.toLowerCase()}>
-      <div className="img-container">
-        {image && <ImgHandler imgSrc={image} altText={image?.title} />}
-      </div>
+      {image && <ImgHandler imgSrc={image} altText={image?.title} />}
       <div className="story-info">
         <h3>{title}</h3>
         <p>{summary}</p>

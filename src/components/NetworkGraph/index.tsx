@@ -91,12 +91,14 @@ const NetworkGraph = ({
     setGrapghConfig(myConfig);
   }, []);
 
+
   // the graph configuration, just override the ones you need
   const myConfig = {
-    directed: false,
+    directed: true,
     highlightDegree: 2,
     highlightOpacity: 0.2,
     linkHighlightBehavior: true,
+    automaticRearrangeAfterDropNode: false,
     maxZoom: 1,
     minZoom: 1,
     nodeHighlightBehavior: true, // comment this to reset nodes positions to work

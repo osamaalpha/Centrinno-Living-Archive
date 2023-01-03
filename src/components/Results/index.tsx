@@ -30,7 +30,7 @@ const Results = ({ limit }: ResultsProps) => {
 
   const shuffledResults = filterResults
     .sort((a: IResult, b: IResult) => 0.5 - Math.random())
-    .splice(0, limit);
+    .slice(0, limit);
 
   return (
     <div className="default-page">

@@ -6,8 +6,6 @@ import {} from "react-router-dom";
 const Taxonomy = () => {
   const location = useLocation();
 
-  console.log(location.pathname);
-
   return (
     <TaxonomyPage>
       <Outlet />

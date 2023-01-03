@@ -17,6 +17,7 @@ const Filter = () => {
     (selectedVariable?.tag as string) || (selectedVariable?.category as string);
   const definition = selectedVariable?.definition;
 
+  console.log(releatedStories, selectedVariable)
 
   return (
     <>

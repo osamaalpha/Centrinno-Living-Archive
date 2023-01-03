@@ -13,9 +13,9 @@ const ImgHandler = ({ imgSrc, altText }: ImgHandlerProps) => {
     return builder.image(source);
   }
   return (
-    <>
+    <div className='image-container'>
       <img src={urlFor(imgSrc).url()} alt={altText} />
-    </>
+    </div>
   );
 };
 

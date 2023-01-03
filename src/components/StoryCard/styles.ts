@@ -9,23 +9,23 @@ export const Card = styled.div`
   align-items: flex-start;
   border: 1px solid ${textColor};
 
-  .img-container {
+  .image-container {
     aspect-ratio: 1;
     overflow: hidden;
     width: 100%;
     display: flex;
     alignt-items: flex-start;
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
   }
 
-  img {
-    width: 100%;
-    object-fit: cover;
-  }
 
   .story-info {
     heigth: 40%;
     padding: 24px;
-    
+
     p {
       display: -webkit-box;
       -webkit-line-clamp: 3;
