@@ -38,11 +38,15 @@ export const Sidebar = styled.aside`
     width: 100%;
     height: 80px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     padding: 0 32px;
     border-bottom: 1px solid ${textColor};
     font-size: 24px;
+
+    p {
+      margin-bottom: 0;
+    }
 
     &.graph-cell {
       height: auto;

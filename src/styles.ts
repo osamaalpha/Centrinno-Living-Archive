@@ -126,9 +126,16 @@ a {
     font-weight: 800;
     font-size: 14px;
     text-transform: uppercase;
+    cursor: pointer
     * {
         color: ${textColor};
     }
+  }
+
+  p {
+    margin-bottom: 16px;
+    line-height: 1.4;
+    font-size: 16px;
   }
 `;
 
@@ -140,6 +147,8 @@ export const Button = styled.button`
   border: 1px solid ${textColor};
   color: ${textColor};
   padding: 12px 25px;
+  cursor: pointer;
+  font-size: 14px;
 `;
 
 Button.propTypes = {

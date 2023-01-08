@@ -33,6 +33,13 @@ export const Story = () => {
               <p>
                 <span>Author:</span> {story.author}
               </p>
+              <Button
+                className="back-button"
+                variant="default"
+                onClick={() => navigate(-1)}
+              >
+                Back
+              </Button>
             </div>
             <div className="cell">
               <p>
@@ -46,21 +53,13 @@ export const Story = () => {
             </div>
             <div className="cell graph-cell">
               <div className="graph-container">
-                <StoryNetworkGraph
-                  tags={splitTags}
-                  storyTitle={story.title}
-                />
+                <StoryNetworkGraph tags={splitTags} storyTitle={story.title} />
               </div>
             </div>
           </Sidebar>
 
           <StoryBody>
             <h1>{story.title}</h1>
-            <Button
-              className="back-button"
-              variant="default"
-              onClick={() => navigate(-1)}
-            />
             {story && story.heroImage && (
               <div className="hero-component">
                 <ImgHandler

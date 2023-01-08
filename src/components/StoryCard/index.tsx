@@ -16,11 +16,9 @@ const StoryCard = ({ image, title, summary }: StoryCardProps) => {
       <div className="story-info">
         <h3>{title}</h3>
         <p>{summary}</p>
-        <Button variant="alt">
-          <Link to={`/story/${title.replaceAll(" ", "-")?.toLowerCase()}`}>
-            READ
-          </Link>
-        </Button>
+        <Link to={`/story/${title.replaceAll(" ", "-")?.toLowerCase()}`}>
+          <Button variant="alt">READ</Button>
+        </Link>
       </div>
     </Card>
   );
