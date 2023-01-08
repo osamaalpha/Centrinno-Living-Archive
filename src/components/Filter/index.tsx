@@ -27,7 +27,7 @@ const Filter = () => {
             <div className="intro-text">
               <h1>{title}</h1>
               <p>{definition}</p>
-              <Results limit={10} />
+              <Results limit={20} />
             </div>
             <div className="graph-container">
               <NetworkGraph

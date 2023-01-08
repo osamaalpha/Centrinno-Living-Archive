@@ -1,15 +1,20 @@
+import { ChangeEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCentrinnoContext } from "../../context/storyContext";
 import { slugify } from "../../helpers/slugify";
+import { SearchStories } from "../../helpers/storySearchHelper";
+import { useReleatedStories } from "../../hooks/useReleatedStories";
 import { Button } from "../../styles";
-import { IContext, IResult, ITag } from "../../types/types";
+import { IContext, IResult, IStory, ITag } from "../../types/types";
 
 interface ResultsProps {
   limit: number;
 }
 
 const Results = ({ limit }: ResultsProps) => {
-  const { tags } = useCentrinnoContext() as IContext;
+  const { tags, stories, categories } = useCentrinnoContext() as IContext;
+  const [inputValue, setInputValue] = useState("");
+  const [searchResultStories, setSearchResultStories] = useState<IStory[]>([]);
 
   let filterResults: IResult[] = [];
 
@@ -32,6 +37,16 @@ const Results = ({ limit }: ResultsProps) => {
     .sort((a: IResult, b: IResult) => 0.5 - Math.random())
     .slice(0, limit);
 
+  const searchHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value)
+  };
+
+  useEffect(() => {
+    setSearchResultStories(SearchStories(inputValue.toLowerCase(), stories));
+  }, [inputValue]);
+
+  console.log(searchResultStories);
+
   return (
     <div className="default-page">
       <input
@@ -39,6 +54,8 @@ const Results = ({ limit }: ResultsProps) => {
         id="site-search"
         name="q"
         placeholder="Search the Centrinno Network"
+        value={inputValue}
+        onChange={searchHandler}
       />
       <div className="results">
         {shuffledResults.map((item: IResult, index: number) => (

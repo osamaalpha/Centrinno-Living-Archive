@@ -15,7 +15,7 @@ padding: 0;
     .intro-text, .graph-container {
         width: 50%;
         padding: 32px 0;
-        aspect-ratio: 1;
+        aspect-ratio: 4/3;
     }
     .intro-text {
         position: relative;

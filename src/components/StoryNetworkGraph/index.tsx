@@ -76,8 +76,8 @@ const StoryNetworkGraph = ({ tags, storyTitle }: StoryNetworkGraphProps) => {
     panAndZoom: false,
     d3: {
       alphaTarget: 0.05,
-      gravity: -90,
-      linkLength: 50,
+      gravity: -180,
+      linkLength: 100,
       linkStrength: 1,
     },
     node: {
@@ -93,6 +93,7 @@ const StoryNetworkGraph = ({ tags, storyTitle }: StoryNetworkGraphProps) => {
       labelPosition: "bottom",
       opacity: 1,
       renderLabel: true,
+      size: 400,
       svg: "",
       symbolType: "circle",
       viewGenerator: null,
