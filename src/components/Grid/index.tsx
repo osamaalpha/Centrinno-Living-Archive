@@ -6,9 +6,10 @@ import { IContext, IStory } from "../../types/types";
 
 interface GridProps {
   relatedStories?: IStory[];
+  isTaxonomy?: boolean;
 }
 
-const Grid = ({ relatedStories }: GridProps) => {
+const Grid = ({ relatedStories, isTaxonomy }: GridProps) => {
   const [gridStories, setGridStories] = useState<IStory[]>([]);
   const { stories } = useCentrinnoContext() as IContext;
 
@@ -19,10 +20,21 @@ const Grid = ({ relatedStories }: GridProps) => {
   }, [relatedStories]);
 
   useEffect(() => {
-    if (stories.length > 0 && relatedStories && relatedStories?.length < 1) {
+    if (
+      stories.length > 0 &&
+      relatedStories &&
+      relatedStories?.length < 1 &&
+      !isTaxonomy
+    ) {
       setGridStories(stories);
-    }
-  }, [stories]);
+    } else if (stories.length > 0 &&
+      relatedStories &&
+      relatedStories?.length >= 1 && isTaxonomy) {
+        setGridStories(relatedStories);
+      } else if (relatedStories && relatedStories.length < 1) {
+        setGridStories([])
+      }
+  }, [isTaxonomy, relatedStories, stories]);
 
   return (
     <GridSection className="grid-section">
