@@ -3,15 +3,17 @@ import { useCentrinnoContext } from "../../context/storyContext";
 import { GridSection } from "./styles";
 import StoryCard from "../StoryCard";
 import { IContext, IStory } from "../../types/types";
+import { useLocation } from "react-router-dom";
 
 interface GridProps {
   relatedStories?: IStory[];
-  isTaxonomy?: boolean;
 }
 
-const Grid = ({ relatedStories, isTaxonomy }: GridProps) => {
+const Grid = ({ relatedStories }: GridProps) => {
   const [gridStories, setGridStories] = useState<IStory[]>([]);
   const { stories } = useCentrinnoContext() as IContext;
+  const location = useLocation()
+  const isTaxonomy = location.pathname === "/taxonomy"
 
   useEffect(() => {
     if (relatedStories && relatedStories.length > 0) {
