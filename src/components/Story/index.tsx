@@ -72,9 +72,6 @@ export const Story = () => {
               <p>{story.summaryText}</p>
               <br />
               <p>{story.mainText}</p>
-              <p>{story.summaryText}</p>
-              <br />
-              <p>{story.mainText}</p>
             </div>
           </StoryBody>
         </StoryPage>
